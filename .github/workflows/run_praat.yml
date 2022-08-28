@@ -41,6 +41,10 @@ jobs:
         run: |
           praat --run example.praat
           # or: ``make output.txt`` as specified in Makefile
+      
+      - name: Print the output to console
+        run: |
+          cat output.txt
 
       - name: Upload the output to artifacts
         uses: actions/upload-artifact@v3
