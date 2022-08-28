@@ -1,11 +1,11 @@
-# Github (actions) praat example
+# GitHub (Actions) praat example
 
 [![Run Praat](https://github.com/edward-martyr/github-praat-example/actions/workflows/run_praat.yml/badge.svg)](https://github.com/edward-martyr/github-praat-example/actions/workflows/run_praat.yml)
 
-## Why use GitHub actions?
+## Why use GitHub Actions?
 
-[GitHub actions](https://docs.github.com/en/actions) allows you to have a clean and stable environment to do phonetic analyses.
-In a larger project, you might be using `R`, `Python`, `ffmpeg`, etc., in your pipeline, and GitHub actions is great for managing versions, dependencies to obtain a stable result.
+[GitHub Actions](https://docs.github.com/en/actions) allows you to have a clean and stable environment to do phonetic analyses.
+In a larger project, you might be using `R`, `Python`, `ffmpeg`, etc., in your pipeline, and GitHub Actions is great for managing versions, dependencies to obtain a stable result.
 
 ## What the example does
 
@@ -14,7 +14,7 @@ It first installs `ffmpeg` and `praat_barren` (a non-GUI version of praat) to th
 
 It downloads an [audio sample of [ɐ̞] found on Wikimedia](https://upload.wikimedia.org/wikipedia/commons/5/50/Open_central_unrounded_vowel.ogg), and converts it to a praat-compatible WAV file using `ffmpeg`.
 
-Then it runs a praat script which analyses the F1 and F2 of the vowel, writing the output to `output.txt`, which is then uploaded to the artifacts of the workflow, to be downloaded just like how you would like to collect your results from GitHub actions in a real project.
+Then it runs a praat script which analyses the F1 and F2 of the vowel, writing the output to `output.txt`, which is then uploaded to the artifacts of the workflow, to be downloaded just like how you would like to collect your results from GitHub Actions in a real project.
 
 Note that non-GUI versions of praat might require you to run a script as follows
 
