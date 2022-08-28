@@ -1,0 +1,48 @@
+name: Run Praat
+
+on:
+  push:
+
+jobs:
+  run_praat:
+    if: ${{ !contains(github.event.head_commit.message, 'skip run') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install ffmpeg
+        run: |
+          sudo apt update
+          sudo apt install ffmpeg
+
+      - name: Install praat_barren
+        run: |
+          tmp_dir=$(mktemp -d -t praat-tmpXXXXXXXXXX)
+          cd $tmp_dir
+
+          wget https://github.com/praat/praat/releases/download/v6.2.17/praat6217_linux64barren.tar.gz
+          praat_name=$(tar -xzvf praat6217_linux64barren.tar.gz)
+
+          cd /usr/local/bin
+          sudo mv $tmp_dir/$praat_name $praat_name
+          sudo ln -s $praat_name praat
+          sudo chmod +x $praat_name
+          sudo chmod +x praat
+
+          rm -rf $tmp_dir
+
+      - name: Download audio file for [ɐ̞] from Wikimedia and convert it into WAV format
+        run: |
+          make audio.wav
+
+      - name: Run praat to analyze the formants of the vowel
+        run: |
+          praat --run example.praat
+          # or: ``make output.txt`` as specified in Makefile
+
+      - name: Upload the output to artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          path: output.txt
